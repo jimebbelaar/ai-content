@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ADHD Harmony — AI Reels Generator
 
-## Getting Started
+A complete AI-powered pipeline for generating ADHD Harmony branded short-form video content (Instagram Reels, TikTok, YouTube Shorts).
 
-First, run the development server:
+Type a concept and the app automatically:
+
+1. **Claude AI** generates a complete voiceover script in the ADHD Harmony voice
+2. **Nano Banana Pro** (Gemini) generates painterly illustrations for each scene
+3. **Veo 3.1** adds subtle living animation to each image
+4. **ElevenLabs** generates the voiceover audio with word-level timestamps
+5. **Canvas + MediaRecorder** stitches everything into a final video with synced subtitles and background music
+
+## Quick Start
+
+### 1. Install Dependencies
+
+```bash
+cd adhd-reels
+npm install
+```
+
+### 2. Configure API Keys
+
+You have two options for API keys:
+
+**Option A: Environment Variables** (recommended for solo use)
+
+Copy the `.env.local` file and fill in your keys:
+
+```bash
+# .env.local
+ANTHROPIC_API_KEY=sk-ant-...
+GOOGLE_AI_API_KEY=AIza...
+ELEVENLABS_API_KEY=xi-...
+```
+
+**Option B: In-App Configuration** (recommended for shared use)
+
+Leave `.env.local` empty and enter keys via the Settings dialog in the app header. Keys are stored in your browser's localStorage.
+
+### 3. Get Your API Keys
+
+| Service | Where to Get Key | What It's Used For |
+|---------|-----------------|-------------------|
+| **Anthropic** | [console.anthropic.com](https://console.anthropic.com) | Script generation (Claude Sonnet) |
+| **Google AI Studio** | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) | Image generation (Nano Banana Pro) + Animation (Veo 3.1) |
+| **ElevenLabs** | [elevenlabs.io/app/settings](https://elevenlabs.io/app/settings) | Voiceover text-to-speech |
+
+
+### 4. Run the App
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage Walkthrough
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Step 1: Concept Input
+Enter your reel concept. For example:
+> "Nietzsche's quote about seeing too much — how it relates to ADHD hyperawareness and why it's actually a gift, not a curse"
 
-## Learn More
+Adjust the number of scenes (6-10) and aspect ratio (9:16 for Reels/TikTok, 16:9 for YouTube).
 
-To learn more about Next.js, take a look at the following resources:
+### Step 2: Script Review
+Claude generates a full script with the ADHD Harmony emotional arc:
+- **Hook** → **Gut Punch** → **Recognition** → **The Weight** → **The Shift** → **The Reframe** → **The Closer**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Each scene includes voiceover text, image prompts, and animation prompts. Edit any scene before proceeding.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Step 3: Image Generation
+Generate painterly illustrations for each scene using Nano Banana Pro (Gemini). Approve, retry, or edit prompts for each image individually.
 
-## Deploy on Vercel
+### Step 4: Animation
+Each approved image gets subtle living animation via Veo 3.1 — barely perceptible movement like floating particles, gentle light flicker, and soft camera drift. Each clip takes ~30-60 seconds to generate.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Step 5: Voiceover
+Generate the voiceover with ElevenLabs. Choose a voice, adjust settings (stability, similarity, style), and optionally upload background music. The volume mixer lets you balance voiceover vs. music.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Step 6: Final Assembly
+Everything gets stitched together with word-by-word synced subtitles. Preview the result and download as WebM.
+
+## Cost Per Reel
+
+| Step | Service | Estimated Cost |
+|------|---------|---------------|
+| Script | Claude Sonnet | ~$0.01 |
+| 8 images | Nano Banana Pro | ~$1.07 |
+| 8 animations | Veo 3.1 | ~$2.80 |
+| Voiceover | ElevenLabs | ~$0.10 |
+| **Total** | | **~$4/reel** |
+
+## Tech Stack
+
+- **Next.js 15** (App Router, TypeScript)
+- **Tailwind CSS v4** + **shadcn/ui**
+- **Zustand** (state management)
+- **Claude Sonnet** (script generation)
+- **Gemini / Nano Banana Pro** (image generation)
+- **Veo 3.1** (image-to-video animation)
+- **ElevenLabs** (text-to-speech with timestamps)
+- **Canvas + MediaRecorder + Web Audio API** (video assembly)
